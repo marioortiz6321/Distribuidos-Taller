@@ -2,7 +2,7 @@ demo:
   ribbon:
     eureka:
       enabled: false
-    listOfServers: localhost:8080,localhost:8081,localhost:8082
+    listOfServers: localhost:8080
     ServerListRefreshInterval: 15000
     
 server:
