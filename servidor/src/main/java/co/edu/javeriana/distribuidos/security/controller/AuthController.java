@@ -11,6 +11,7 @@ import co.edu.javeriana.distribuidos.security.enums.RolNombre;
 import co.edu.javeriana.distribuidos.security.service.RolService;
 import co.edu.javeriana.distribuidos.security.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,6 +24,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,6 +47,15 @@ public class AuthController {
 
     @Autowired
     JwtProvider jwtProvider;
+
+    @Value("${server.port}")
+    private int port;
+    @GetMapping("/port")
+    public String getPort() throws UnknownHostException {
+        String q=InetAddress.getLocalHost().getHostAddress();
+        InetAddress.getLocalHost().getHostName();
+        return q+":"+port;
+    }
 
     @PostMapping("/nuevo")
     public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult){

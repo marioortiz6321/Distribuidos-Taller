@@ -1,0 +1,90 @@
+2022-11-08 16:38:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "CREATE TABLE PRODUCTO (ID INTEGER NOT NULL AUTO_INCREMENT, EXISTENCIAS FLOAT NOT NULL, NOMBRE VARCHAR(255), PRIMARY KEY (ID)) ENGINE=[*]MYISAM"; se esperaba "identifier"
+Syntax error in SQL statement "CREATE TABLE PRODUCTO (ID INTEGER NOT NULL AUTO_INCREMENT, EXISTENCIAS FLOAT NOT NULL, NOMBRE VARCHAR(255), PRIMARY KEY (ID)) ENGINE=[*]MYISAM"; expected "identifier"; SQL statement:
+create table producto (id integer not null auto_increment, existencias float not null, nombre varchar(255), primary key (id)) engine=MyISAM [42001-200]
+2022-11-08 16:38:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "CREATE TABLE ROL (ID INTEGER NOT NULL AUTO_INCREMENT, ROL_NOMBRE VARCHAR(255) NOT NULL, PRIMARY KEY (ID)) ENGINE=[*]MYISAM"; se esperaba "identifier"
+Syntax error in SQL statement "CREATE TABLE ROL (ID INTEGER NOT NULL AUTO_INCREMENT, ROL_NOMBRE VARCHAR(255) NOT NULL, PRIMARY KEY (ID)) ENGINE=[*]MYISAM"; expected "identifier"; SQL statement:
+create table rol (id integer not null auto_increment, rol_nombre varchar(255) not null, primary key (id)) engine=MyISAM [42001-200]
+2022-11-08 16:38:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "CREATE TABLE USUARIO (ID INTEGER NOT NULL AUTO_INCREMENT, EMAIL VARCHAR(255) NOT NULL, NOMBRE VARCHAR(255) NOT NULL, NOMBRE_USUARIO VARCHAR(255) NOT NULL, PASSWORD VARCHAR(255) NOT NULL, PRIMARY KEY (ID)) ENGINE=[*]MYISAM"; se esperaba "identifier"
+Syntax error in SQL statement "CREATE TABLE USUARIO (ID INTEGER NOT NULL AUTO_INCREMENT, EMAIL VARCHAR(255) NOT NULL, NOMBRE VARCHAR(255) NOT NULL, NOMBRE_USUARIO VARCHAR(255) NOT NULL, PASSWORD VARCHAR(255) NOT NULL, PRIMARY KEY (ID)) ENGINE=[*]MYISAM"; expected "identifier"; SQL statement:
+create table usuario (id integer not null auto_increment, email varchar(255) not null, nombre varchar(255) not null, nombre_usuario varchar(255) not null, password varchar(255) not null, primary key (id)) engine=MyISAM [42001-200]
+2022-11-08 16:38:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "CREATE TABLE USUARIO_ROL (USUARIO_ID INTEGER NOT NULL, ROL_ID INTEGER NOT NULL, PRIMARY KEY (USUARIO_ID, ROL_ID)) ENGINE=[*]MYISAM"; se esperaba "identifier"
+Syntax error in SQL statement "CREATE TABLE USUARIO_ROL (USUARIO_ID INTEGER NOT NULL, ROL_ID INTEGER NOT NULL, PRIMARY KEY (USUARIO_ID, ROL_ID)) ENGINE=[*]MYISAM"; expected "identifier"; SQL statement:
+create table usuario_rol (usuario_id integer not null, rol_id integer not null, primary key (usuario_id, rol_id)) engine=MyISAM [42001-200]
+2022-11-08 16:38:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "USUARIO" no encontrada
+Table "USUARIO" not found; SQL statement:
+alter table usuario add constraint UK_puhr3k3l7bj71hb7hk7ktpxn0 unique (nombre_usuario) [42102-200]
+2022-11-08 16:38:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "USUARIO_ROL" no encontrada
+Table "USUARIO_ROL" not found; SQL statement:
+alter table usuario_rol add constraint FK610kvhkwcqk2pxeewur4l7bd1 foreign key (rol_id) references rol (id) [42102-200]
+2022-11-08 16:38:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "USUARIO_ROL" no encontrada
+Table "USUARIO_ROL" not found; SQL statement:
+alter table usuario_rol add constraint FKbyfgloj439r9wr9smrms9u33r foreign key (usuario_id) references usuario (id) [42102-200]
+2022-11-08 16:43:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "USUARIO" no encontrada
+Table "USUARIO" not found; SQL statement:
+select usuario0_.id as id1_2_, usuario0_.email as email2_2_, usuario0_.nombre as nombre3_2_, usuario0_.nombre_usuario as nombre_u4_2_, usuario0_.password as password5_2_ from usuario usuario0_ where usuario0_.nombre_usuario=? [42102-200]
+2022-11-08 16:43:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "USUARIO" no encontrada
+Table "USUARIO" not found; SQL statement:
+select usuario0_.id as id1_2_, usuario0_.email as email2_2_, usuario0_.nombre as nombre3_2_, usuario0_.nombre_usuario as nombre_u4_2_, usuario0_.password as password5_2_ from usuario usuario0_ where usuario0_.nombre_usuario=? [42102-200]
+2022-11-08 16:43:32 database: flush
+org.h2.message.DbException: Error General : "java.lang.IllegalStateException: The file is locked: nio:C:/Users/home/Documents/javeriana/Sistemas Distribuidos/Distribuidos-Taller/servidor/testdb.mv.db [1.4.200/7]"
+General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/home/Documents/javeriana/Sistemas Distribuidos/Distribuidos-Taller/servidor/testdb.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2877)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:481)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:402)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:3579)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:170)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:103)
+	at org.h2.engine.Database.getPageStore(Database.java:2659)
+	at org.h2.engine.Database.open(Database.java:675)
+	at org.h2.engine.Database.openDatabase(Database.java:307)
+	at org.h2.engine.Database.<init>(Database.java:301)
+	at org.h2.engine.Engine.openSession(Engine.java:74)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:353)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:473)
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71)
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:727)
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:713)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Error General : "java.lang.IllegalStateException: The file is locked: nio:C:/Users/home/Documents/javeriana/Sistemas Distribuidos/Distribuidos-Taller/servidor/testdb.mv.db [1.4.200/7]"
+General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/home/Documents/javeriana/Sistemas Distribuidos/Distribuidos-Taller/servidor/testdb.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 33 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/home/Documents/javeriana/Sistemas Distribuidos/Distribuidos-Taller/servidor/testdb.mv.db [1.4.200/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
+	at org.h2.mvstore.FileStore.open(FileStore.java:166)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
+	... 27 more
+Caused by: java.nio.channels.OverlappingFileLockException
+	at java.base/sun.nio.ch.FileLockTable.checkList(FileLockTable.java:229)
+	at java.base/sun.nio.ch.FileLockTable.add(FileLockTable.java:123)
+	at java.base/sun.nio.ch.FileChannelImpl.tryLock(FileChannelImpl.java:1297)
+	at org.h2.store.fs.FileNio.tryLock(FilePathNio.java:121)
+	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1191)
+	at org.h2.mvstore.FileStore.open(FileStore.java:163)
+	... 28 more

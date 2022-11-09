@@ -3,9 +3,11 @@ package co.edu.javeriana.distribuidos.util;
 import co.edu.javeriana.distribuidos.security.service.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
+@Profile({"default"})
 public class CreateRoles implements CommandLineRunner {
 
     @Autowired
