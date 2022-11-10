@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./nuevo-producto.component.css']
 })
 export class NuevoProductoComponent implements OnInit {
+  cont: number=0;
 
   nombre = '';
   existencias: number = null;
@@ -24,20 +25,28 @@ export class NuevoProductoComponent implements OnInit {
   }
 
   onCreate(): void {
+    this.cont++;
     const producto = new Producto(this.nombre, this.existencias);
     this.productoService.save(producto).subscribe(
       data => {
+        this.cont=0;
         this.toastr.success('Producto Creado', 'OK', {
           timeOut: 3000, positionClass: 'toast-top-right'
         });
       },
       err => {
+        if(this.cont<4){
+          this.onCreate();
+        }
+        else{
+          this.cont=0;
         this.toastr.error(err.error.mensaje, 'Fail', {
           timeOut: 3000,  positionClass: 'toast-top-right',
 
         });
 
       }
+    }
     );
   }
 

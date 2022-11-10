@@ -12,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegistroComponent implements OnInit {
 
+  cont: number=0;
+
   nuevoUsuario: NuevoUsuario;
   nombre: string;
   nombreUsuario: string;
@@ -34,9 +36,11 @@ export class RegistroComponent implements OnInit {
   }
 
   onRegister(): void {
+    this.cont++;
     this.nuevoUsuario = new NuevoUsuario(this.nombre, this.nombreUsuario, this.email, this.password);
     this.authService.nuevo(this.nuevoUsuario).subscribe(
       data => {
+        this.cont=0;
         this.toastr.success('Cuenta Creada', 'OK', {
           timeOut: 3000, positionClass: 'toast-top-right'
         });
@@ -44,12 +48,18 @@ export class RegistroComponent implements OnInit {
         this.router.navigate(['/login']);
       },
       err => {
+        if(this.cont<4){
+        this.onRegister();
+        }
+        else{
+        this.cont=0;
         this.errMsj = err.error.mensaje;
         this.toastr.error(this.errMsj, 'Fail', {
-          timeOut: 3000,  positionClass: 'toast-top-right',
-        });
+        timeOut: 3000,  positionClass: 'toast-top-right',
+       });
         // console.log(err.error.message);
       }
+    }
     );
   }
 

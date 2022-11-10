@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./editar-producto.component.css']
 })
 export class EditarProductoComponent implements OnInit {
+  cont: number=0;
 
   producto: Producto = null;
 
@@ -21,21 +22,31 @@ export class EditarProductoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.cont++;
     const id = this.activatedRoute.snapshot.params.id;
     this.productoService.detail(id).subscribe(
       data => {
+        this.cont=0;
         this.producto = data;
       },
       err => {
+
+        if(this.cont<4){
+          this.ngOnInit();
+        }
+        else{
+        this.cont=0;
         this.toastr.error(err.error.mensaje, 'Fail', {
           timeOut: 3000,  positionClass: 'toast-top-right',
         });
         this.router.navigate(['/']);
       }
+    }
     );
   }
 
   onUpdate(): void {
+    this.cont++;
     const id = this.activatedRoute.snapshot.params.id;
     this.productoService.update(id, this.producto).subscribe(
       data => {
@@ -45,11 +56,17 @@ export class EditarProductoComponent implements OnInit {
         this.router.navigate(['/lista']);
       },
       err => {
+        if(this.cont<4){
+          this.onUpdate();
+        }
+        else{
+        this.cont=0;
         this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000,  positionClass: 'toast-top-right',
+        timeOut: 3000,  positionClass: 'toast-top-right',
         });
         // this.router.navigate(['/']);
       }
+    }
     );
   }
 

@@ -12,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
+  cont: number=0;
+
   isLogged = false;
   isLoginFail = false;
   loginUsuario: LoginUsuario;
@@ -36,11 +38,11 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
+    this.cont++;
     this.loginUsuario = new LoginUsuario(this.nombreUsuario, this.password);
     this.authService.login(this.loginUsuario).subscribe(
       data => {
         this.isLogged = true;
-
         this.tokenService.setToken(data.token);
         this.tokenService.setUserName(data.nombreUsuario);
         this.tokenService.setAuthorities(data.authorities);
@@ -51,13 +53,17 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/lista']);
       },
       err => {
-        this.isLogged = false;
-        this.errMsj = err.error.message;
-        this.toastr.error(this.errMsj, 'Fail', {
+        if(this.cont<4){
+        this.onLogin();
+        }
+        else{
+          this.cont=0;
+          this.errMsj = err.error.mensaje;
+          this.toastr.error(this.errMsj, 'Fail', {
           timeOut: 3000,  positionClass: 'toast-top-right',
-        });
-        // console.log(err.error.message);
+         });
       }
+    }
     );
   }
 

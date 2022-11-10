@@ -8,31 +8,54 @@ import { tap } from 'rxjs/operators';
 })
 export class ProductoService {
 
-  productoURL = 'http://localhost:8080/producto/';
+  //productoURL = 'http://localhost:8080/producto/';
+  URL2='http://localhost:8989/port';
 
+  port: string="";
   constructor(private httpClient: HttpClient) { }
 
   public lista(): Observable<Producto[]> {
-    return this.httpClient.get<Producto[]>(this.productoURL + 'lista');
+   this.Search();
+   return this.httpClient.get<Producto[]>('http://'+this.port+'/producto/' +'lista');
+
   }
 
   public detail(id: number): Observable<Producto> {
-    return this.httpClient.get<Producto>(this.productoURL + `detail/${id}`);
+    this.Search();
+    return this.httpClient.get<Producto>('http://'+this.port+'/producto/' + `detail/${id}`);
+
+   // return this.httpClient.get<Producto>(this.productoURL + `detail/${id}`);
   }
 
   public detailName(nombre: string): Observable<Producto> {
-    return this.httpClient.get<Producto>(this.productoURL + `detailname/${nombre}`);
+    this.Search();
+    return this.httpClient.get<Producto>('http://'+this.port+'/producto/' + `detailName/${nombre}`);
+   // return this.httpClient.get<Producto>(this.productoURL + `detailname/${nombre}`);
   }
 
   public save(producto: Producto): Observable<any> {
-    return this.httpClient.post<any>(this.productoURL + 'create', producto);
+    this.Search();
+    return this.httpClient.post<any>('http://'+this.port+'/producto/' + 'create', producto);
+   // return this.httpClient.post<any>(this.productoURL + 'create', producto);
   }
 
   public update(id: number, producto: Producto): Observable<any> {
-    return this.httpClient.put<any>(this.productoURL + `update/${id}`, producto);
+    this.Search();
+    return this.httpClient.put<any>('http://'+this.port+'/producto/' + `update/${id}`, producto);
+ //   return this.httpClient.put<any>(this.productoURL + `update/${id}`, producto);
   }
 
   public delete(id: number): Observable<any> {
-    return this.httpClient.delete<any>(this.productoURL + `delete/${id}`);
+    this.Search();
+    return this.httpClient.delete<any>('http://'+this.port+'/producto/' + `delete/${id}`);
+  //  return this.httpClient.delete<any>(this.productoURL + `delete/${id}`);
   }
+  
+
+  Search(): void {
+    this.httpClient.get(this.URL2, {responseType: 'text'}).subscribe(data => {
+      this.port=data;
+    });
+  }
+  
 }

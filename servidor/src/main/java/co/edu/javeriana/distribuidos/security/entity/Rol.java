@@ -19,4 +19,7 @@ public class Rol {
     @Enumerated(EnumType.STRING)
     private RolNombre rolNombre;
 
+    public Rol(@NotNull RolNombre roleNombre) {
+        this.rolNombre = roleNombre;
+    }
 }

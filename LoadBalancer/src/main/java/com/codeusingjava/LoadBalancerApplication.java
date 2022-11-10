@@ -15,6 +15,7 @@ import com.codeusingjava.config.RibbonConfiguration;
 		"com.netflix.client.config.IClientConfig"
 })
 @RestController
+@CrossOrigin
 @RibbonClient(name="distribuidos",configuration=RibbonConfiguration.class)
 public class LoadBalancerApplication {
 

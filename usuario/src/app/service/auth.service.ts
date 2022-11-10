@@ -10,15 +10,26 @@ import { JwtDTO } from '../models/jwt-dto';
 })
 export class AuthService {
 
-  authURL = 'http://localhost:8080/auth/';
+  URL2='http://localhost:8989/port';
 
+  port: string="";
   constructor(private httpClient: HttpClient) { }
 
   public nuevo(nuevoUsuario: NuevoUsuario): Observable<any> {
-    return this.httpClient.post<any>(this.authURL + 'nuevo', nuevoUsuario);
+    this.Search();
+   // return this.httpClient.post<any>(this.authURL + 'nuevo', nuevoUsuario);
+   return this.httpClient.post<any>('http://'+this.port+'/auth/' + 'nuevo', nuevoUsuario);
   }
 
   public login(loginUsuario: LoginUsuario): Observable<JwtDTO> {
-    return this.httpClient.post<JwtDTO>(this.authURL + 'login', loginUsuario);
+   this.Search();
+
+    return this.httpClient.post<JwtDTO>('http://'+this.port+'/auth/' + 'login', loginUsuario);
+  }
+
+  Search(): void {
+    this.httpClient.get(this.URL2, {responseType: 'text'}).subscribe(data => {
+      this.port=data;
+    });
   }
 }
