@@ -2,7 +2,7 @@ distribuidos:
   ribbon:
     eureka:
       enabled: false
-    listOfServers: localhost:8080,10.195.41.29:8080,10.195.43.155:8080
+    listOfServers: localhost:8080,10.195.42.134:8080,10.195.42.249:8080
     ServerListRefreshInterval: 15000
     
 server:
